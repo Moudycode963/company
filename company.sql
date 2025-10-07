@@ -8,8 +8,15 @@ CREATE TABLE employees
     fname VARCHAR(255),
     lname VARCHAR(255)
 );
-
+CREATE TABLE department
+(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255)
+);
 INSERT INTO employees(fname, lname) VALUES
                                         ('Roy', 'Trenneman'),
                                         ('Maurice', 'Moss'),
                                         ('Jen', 'Barber');
+INSERT INTO department(name) VALUES
+                                 ('test');
+
