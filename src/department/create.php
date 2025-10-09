@@ -49,7 +49,7 @@ elseif ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $is_hiring = $_POST["is_hiring"] ?? 0;
     $work_mode = $_POST["work_mode"];
 
-    $conn = new PDO("mysql:host=localhost;dbname=company", "phpstorm", "Ahmadtow7@");
+    $conn = dbcon();
     $sql = /** @lang text */
         "INSERT INTO department (name, is_hiring, work_mode) VALUES (:name_department, :is_hiring, :work_mode)";
     $stmt = $conn->prepare($sql);
@@ -58,8 +58,8 @@ elseif ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $stmt->bindParam(':work_mode', $work_mode);
     $stmt->execute();
     echo "✅ Department wurde eingetragen!";
-    header("refresh:1;url=create.php"); // nach 2 Sekunden weiterleiten
-    exit();
+  //  header("refresh:1;url=create.php"); // nach 2 Sekunden weiterleiten
+  //  exit();
 }
 
 ?>

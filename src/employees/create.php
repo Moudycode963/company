@@ -1,11 +1,16 @@
 <?php
 
 // Prüfen, welche HTTP-Methode verwendet wurde (GET = Formular anzeigen, POST = Formular absenden/verarbeiten)
+global $id;
 if ($_SERVER["REQUEST_METHOD"] === 'GET') {
     // Debugging-Ausgabe der $_SERVER-Variablen (auskommentiert)
     // echo '<pre>';
     // var_dump($_SERVER);
     // echo '</pre>';
+    if ($id) {
+        $_GET['id'] = $id;
+    }
+
     ?>
     <!doctype html>
     <html lang="en">
@@ -18,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'GET') {
         <title>Document</title>
     </head>
     <body>
-    <h2> Create datensatz: </h2>
+    <h2> Create employee: </h2>
     <!-- Formular zum Anlegen eines neuen Datensatzes -->
     <form action='' method='post'>
         <label for="fname">First name:</label><br>
@@ -42,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'GET') {
     $lname = $_POST["lname"];
 
     // Verbindung zur Datenbank herstellen
-    $conn = new PDO('mysql:host=localhost;dbname=company', 'phpstorm', 'Ahmadtow7@');
+    $conn = dbcon();
     // SQL-Befehl vorbereiten (Achtung: aktuell unsicher, da direkt Variablen eingebaut → SQL-Injection möglich!)
     // diese Ganze :fname :lname ist dafür da um man den SQL-Injection zu vermeiden . jetzt ist Sicher
     $sql = "INSERT INTO employees (fname, lname) VALUES (:fname,:lname)";
