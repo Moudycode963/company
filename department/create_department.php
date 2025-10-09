@@ -32,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'GET') {
     </label><br><br>
 
     <input type="submit" value="Create">
+    <input type="submit" value="back">
 
 </form>
 </body>
@@ -57,7 +58,7 @@ elseif ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $stmt->bindParam(':work_mode', $work_mode);
     $stmt->execute();
     echo "✅ Department wurde eingetragen!";
-    header("refresh:2;url=read_department.php"); // nach 2 Sekunden weiterleiten
+    header("refresh:1;url=create_department.php"); // nach 2 Sekunden weiterleiten
     exit();
 }
 
