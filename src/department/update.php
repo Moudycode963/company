@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] === 'GET') {
-    $id = $_GET['id'] ?? 1; // Beispiel: edit_department.php?id=3
+ //  $id = $_GET['id'] ?? 1; // Beispiel: edit_department.php?id=3
 
     $conn = new PDO('mysql:host=localhost;dbname=company', 'phpstorm', 'Ahmadtow7@');
     $sql = 'SELECT * FROM department WHERE id = :id';
@@ -75,8 +75,8 @@ if ($_SERVER["REQUEST_METHOD"] === 'GET') {
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
 
-    echo "✅ Daten wurden erfolgreich aktualisiert!";
-    header("refresh:2;url=read.php"); // nach 2 Sekunden weiterleiten
-    exit();
+//    echo "✅ Daten wurden erfolgreich aktualisiert!";
+ //   header("refresh:2;url=read.php"); // nach 2 Sekunden weiterleiten
+    //   exit();
 }
 ?>

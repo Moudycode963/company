@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'GET') {
         <title>Document</title>
     </head>
     <body>
-    <h2> Create datensatz: </h2>
+    <h2> Create employee: </h2>
     <!-- Formular zum Anlegen eines neuen Datensatzes -->
     <form action='' method='post'>
         <label for="fname">First name:</label><br>

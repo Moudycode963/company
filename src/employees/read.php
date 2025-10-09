@@ -36,10 +36,10 @@ function createTable(array $data, array|false $ueberschrifeten = false, string $
         }
         $string .= "<td class='link' style='background-color: white'>";
         $id = $user['id'];
-        $string .= "<a href='delete_employee.php.php?id=$id'>Delete</a>";
+        $string .= "<a href='/employees/delete/{$id}'>Delete</a>";
         $string .= "</td>";
         $string .= "<td class='link' style='background-color: white'>";
-        $string .= "<a href='update_employee.php?id=$id'>Update</a>";
+        $string .= "<a href='employees/update/{$id}'>Update</a>";
         $string .= "</td>";
         $string .= "</tr>";
     }
