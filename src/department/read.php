@@ -62,7 +62,7 @@ function createTable(array $data, array|false $ueberschrifeten = false, string $
 <body>
 <h1>Welcome in meine Firma</h1>
 <td style='background-color: white; text-align: center;'>
-    <a href='create_department.php?id=$id'>✏️ Create Departments</a>
+    <a href='create.php?id=$id'>✏️ Create Departments</a>
 </td><br><br>
 <h2>Meine Departments</h2>
 <?= createTable($array) ?>

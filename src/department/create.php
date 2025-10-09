@@ -58,7 +58,7 @@ elseif ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $stmt->bindParam(':work_mode', $work_mode);
     $stmt->execute();
     echo "✅ Department wurde eingetragen!";
-    header("refresh:1;url=create_department.php"); // nach 2 Sekunden weiterleiten
+    header("refresh:1;url=create.php"); // nach 2 Sekunden weiterleiten
     exit();
 }
 
