@@ -1,7 +1,28 @@
+# Diese Zeile legt die Standard-Datei fest, die geladen wird, wenn
+# nur der Verzeichnispfad aufgerufen wird (z. B. "meine-website.de/").
+# In diesem Fall wird "index.php" automatisch geladen.
 DirectoryIndex index.php
+
+# Dies schaltet die URL-Rewriting-Engine von Apache ein.
+# Ohne diese Zeile funktionieren die folgenden Regeln nicht.
 RewriteEngine On
 
-RewriteCond %{REQUEST_FILENAME} !-f
+# Dies ist eine Bedingung (RewriteCond).
+# Sie prüft, ob der angeforderte Pfad (!-f) KEINE physische Datei ist.
+# Wenn der Pfad zu einer Bilddatei, einem CSS- oder JavaScript-File führt,
+# wird die RewriteRule (die nächste Zeile) übersprungen.
+RewriteCond %{REQUEST_FILENAME} !-f [OR]
+
+# Dies ist eine weitere Bedingung.
+# Sie prüft, ob der angeforderte Pfad (!-d) KEIN physisches Verzeichnis ist.
+# Wenn der Pfad zu einem echten Ordner führt, wird die Regel ebenfalls übersprungen.
 RewriteCond %{REQUEST_FILENAME} !-d
 
+# Dies ist die eigentliche Rewrite-Regel.
+# ^(.*)$ : Erfasst alles im URL-Pfad (von Anfang bis Ende).
+# index.php?url=$1 : Leitet die Anfrage intern an die index.php um und
+#                    übergibt den erfassten Pfad als GET-Parameter namens "url".
+# [L] : Die Abkürzung für "Last". Dies stoppt die Verarbeitung weiterer Regeln.
+# [QSA] : Die Abkürzung für "Query String Append". Dies stellt sicher, dass
+#         eventuell vorhandene Query-Strings (z. B. "?id=1") nicht verloren gehen.
 RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]

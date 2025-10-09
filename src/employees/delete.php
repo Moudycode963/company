@@ -1,8 +1,8 @@
 <?php
 //
 
-remove($id,'department');
-header("Location: ". DOMAIN_NAME . "/department/read");
+remove($id,'employees');
+header("Location: ". DOMAIN_NAME . "/employees/read");
 exit();
 
 
