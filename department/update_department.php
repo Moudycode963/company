@@ -1,57 +1,82 @@
 <?php
-
 if ($_SERVER["REQUEST_METHOD"] === 'GET') {
+    $id = $_GET['id'] ?? 1; // Beispiel: edit_department.php?id=3
 
-
-    $id = $_GET['id'];
     $conn = new PDO('mysql:host=localhost;dbname=company', 'phpstorm', 'Ahmadtow7@');
-    $sql = 'Select * from department where id = :id';
+    $sql = 'SELECT * FROM department WHERE id = :id';
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    $name = $result['name'];
-    $id = $result['id'];
-    $is_hiring = $_POST['is_hiring'] ?? false;
-    var_dump($result);
-    if($result['is_hiring']){
-        $checked = 'checked';
-    }else{
+
+    if ($result) {
+        $name = $result['name'];
+        $is_hiring = $result['is_hiring'];
+        $work_mode = $result['work_mode'];
+        $checked = $is_hiring ? 'checked' : '';
+    } else {
+        $name = '';
+        $is_hiring = 0;
+        $work_mode = '';
         $checked = '';
     }
     ?>
-
     <!doctype html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Update Department</title>
     </head>
-<body>
+    <body>
+    <h1>Update Department</h1>
+    <form action="" method="post">
+        <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
 
-<form action='' method='post'>
-    <input type='text' name='name' placeholder='name' value='<?= $name?>'>
-    <input type='checkbox' name='is_hiring' placeholder='name' value = 1;  <=? $checked= ?> >
-    <input type='hidden' name='id' value='<?= $id ?>'>
-    <input type='submit' value='submit'>
-</form>
+        <label>
+            Name:
+            <input type="text" name="name" placeholder="Name" value="<?= htmlspecialchars($name) ?>">
+        </label><br><br>
+
+        <label>
+            Is hiring?
+            <input type="checkbox" name="is_hiring" value="1" <?= $checked ?>>
+        </label><br><br>
+
+        <label>
+            <input type="radio" name="work_mode" value="onsite" <?= $work_mode === 'onsite' ? 'checked' : '' ?>> Onsite
+        </label><br>
+        <label>
+            <input type="radio" name="work_mode" value="remote" <?= $work_mode === 'remote' ? 'checked' : '' ?>> Remote
+        </label><br>
+        <label>
+            <input type="radio" name="work_mode" value="hybrid" <?= $work_mode === 'hybrid' ? 'checked' : '' ?>> Hybrid
+        </label><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+    </body>
+    </html>
     <?php
-}elseif ($_SERVER['REQUEST_METHOD'] === 'POST'){
-
-    $name = $_POST['name'];
+} elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'];
-    $conn = new PDO('mysql:host=localhost;dbname=company','phpstorm','Ahmadtow7@');
-    $sql = "UPDATE  department set name = :name where id = :id";
+    $name = $_POST['name'];
+    $is_hiring = isset($_POST['is_hiring']) ? 1 : 0;
+    $work_mode = $_POST['work_mode'] ?? null;
+
+    $conn = new PDO('mysql:host=localhost;dbname=company', 'phpstorm', 'Ahmadtow7@');
+    $sql = "UPDATE department 
+            SET name = :name, is_hiring = :is_hiring, work_mode = :work_mode 
+            WHERE id = :id";
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':name',$name);
-    $stmt->bindParam(':id',$id);
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':is_hiring', $is_hiring, PDO::PARAM_INT);
+    $stmt->bindParam(':work_mode', $work_mode);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
-    echo " wurde eingetragen!.";
 
-
-
+    echo "✅ Daten wurden erfolgreich aktualisiert!";
+    header("refresh:2;url=read_department.php"); // nach 2 Sekunden weiterleiten
+    exit();
 }
 ?>
