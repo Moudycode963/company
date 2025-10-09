@@ -6,5 +6,5 @@ $id = $_GET['id'];
 $stmt = $conn->prepare($sql);
 $stmt->bindParam(':id', $id);
 $stmt->execute();
-header("location: read_department.php");
+header("location: read.php");
 exit();

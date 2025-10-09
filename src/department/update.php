@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'GET') {
     $stmt->execute();
 
     echo "✅ Daten wurden erfolgreich aktualisiert!";
-    header("refresh:2;url=read_department.php"); // nach 2 Sekunden weiterleiten
+    header("refresh:2;url=read.php"); // nach 2 Sekunden weiterleiten
     exit();
 }
 ?>
