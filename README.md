@@ -46,8 +46,29 @@ A simple PHP & MySQL CRUD application to manage employees and departments in a c
    ```bash
    git clone https://github.com/Moudycode963/company.git
    cd company
+Import the SQL schema:
 
+bash
+Code kopieren
+mysql -u root -p < migrations/company.sql
+Configure your database connection in:
 
+arduino
+Code kopieren
+config/config.php
+Start a local PHP server:
+
+bash
+Code kopieren
+php -S localhost:8000 -t public
+Open your browser and visit:
+
+arduino
+Code kopieren
+http://localhost:8000
+📄 Project Structure
+pgsql
+Code kopieren
 company/
 ├── config/
 │   ├── config.php
@@ -68,3 +89,8 @@ company/
 │   ├── index.php
 │   └── 404.html
 └── README.md
+🧑‍💻 Author
+Moudycode963
+📍 Berlin, Germany
+💻 Passionate about PHP, Web Development & Databases
+🔗 GitHub Profile
