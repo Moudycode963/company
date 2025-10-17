@@ -69,6 +69,7 @@ http://localhost:8000
 📄 Project Structure
 pgsql
 Code kopieren
+
 company/
 ├── config/
 │   ├── config.php
@@ -89,6 +90,11 @@ company/
 │   ├── index.php
 │   └── 404.html
 └── README.md
+
+
+
+
+
 🧑‍💻 Author
 Moudycode963
 📍 Berlin, Germany
