@@ -1,0 +1,25 @@
+<?php
+// daten auslesen aus dem Datensatz
+$data = findById($id,'department');
+?>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div><?= $data['name']?></div>
+<div><?= $data['id']?></div>
+<div><?= $data['work_mode']?></div>
+<div><?= $data['name']?></div>
+<a href='/department/update/<?= $id ?>'>Update</a>
+<a href='/department/delete/<?= $id ?>'>delete</a>
+
+</body>
+</html>

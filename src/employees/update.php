@@ -1,0 +1,59 @@
+<?php
+
+
+if ($_SERVER["REQUEST_METHOD"] === 'GET') {
+   // $id = (int)$_GET['id'];
+    $result = findById($id, 'employees');
+    $fname = $result['fname'];
+    $lname = $result['lname'];
+//    $id = $result['id'];
+
+    // $id = $_GET['id'];
+//    $conn = dbcon();
+//    $sql = "Select * from employees where id = :id";
+//    $stmt = $conn->prepare($sql);
+//     $stmt->bindParam(':id', $id);
+//    $stmt->execute();
+//    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+//    $id = $result['id'];
+    //  var_dump($result);
+
+    ?>
+
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Update employee</title>
+    </head>
+<body>
+<h1>Update employee</h1>
+<form action='' method='post'>
+    <input type='text' name='fname' placeholder='fname' value='<?= $fname ?>'>
+    <input type='text' name='lname' placeholder='lname' value='<?= $lname ?>'>
+    <input type='hidden' name='id' value='<?= $id ?>'>
+    <input type='submit'>
+</form>
+    <?php
+} elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    update('employees', $_POST);
+    header("Location: " . DOMAIN_NAME . '/employees/read');
+    exit();
+
+
+//    $fname = $_POST['fname'];
+//    $lname = $_POST['lname'];
+//    $id = $_POST['id'];
+//    $conn = db_con();
+//    $sql = "UPDATE employees set fname = :fname , lname = :lname where id = :id";
+//    $stmt = $conn->prepare($sql);
+//    $stmt->bindParam(':fname',$fname);
+//    $stmt->bindParam(':lname',$lname);
+//    $stmt->bindParam(':id',$id);
+//    $stmt->execute();
+}
+?>
